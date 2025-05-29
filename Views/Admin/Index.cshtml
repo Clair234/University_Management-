@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Admin Dashboard";
+}
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        color: #212529;
+        font-weight: bold;
+    }
+
+    .dashboard-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #0d6efd;
+    }
+
+    .admin-card {
+        border-radius: 1rem;
+        box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+        transition: 0.3s ease;
+        padding: 2rem;
+        background-color: #ffffff;
+        min-height: 230px;
+        font-weight: bold;
+    }
+
+        .admin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+        }
+
+        .admin-card .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0d6efd;
+        }
+
+        .admin-card .card-text {
+            color: #6c757d;
+            font-weight: bold;
+        }
+
+        .admin-card .btn {
+            font-weight: bold;
+        }
+
+    .card-students i {
+        color: #0d6efd;
+    }
+
+    .card-courses i {
+        color: #198754;
+    }
+
+    .card-faculty i {
+        color: #fd7e14;
+    }
+</style>
+
+<div class="container py-5">
+    <h2 class="dashboard-title text-center mb-5">🎓 Welcome, Admin!</h2>
+
+    <div class="row g-4">
+        <!-- Students -->
+        <div class="col-md-4">
+            <div class="card admin-card card-students text-center">
+                <div class="card-body">
+                    <i class="bi bi-people-fill fs-1 mb-3"></i>
+                    <h5 class="card-title">Students</h5>
+                    <p class="card-text">View and manage enrolled students.</p>
+                    <a href="@Url.Action("ManageStudents", "Admin")" class="btn btn-primary mt-2">Manage</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses -->
+        <div class="col-md-4">
+            <div class="card admin-card card-courses text-center">
+                <div class="card-body">
+                    <i class="bi bi-book-half fs-1 mb-3"></i>
+                    <h5 class="card-title">Courses</h5>
+                    <p class="card-text">Create and assign courses.</p>
+                    <a href="@Url.Action("ManageCourses", "Admin")" class="btn btn-success mt-2">Manage</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Faculty -->
+        <div class="col-md-4">
+            <div class="card admin-card card-faculty text-center">
+                <div class="card-body">
+                    <i class="bi bi-person-badge-fill fs-1 mb-3"></i>
+                    <h5 class="card-title">Faculty</h5>
+                    <p class="card-text">Create and assign faculty members.</p>
+                    <a href="@Url.Action("ManageFaculties", "Admin")" class="btn btn-warning mt-2 text-white">Manage</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

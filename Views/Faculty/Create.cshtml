@@ -1,0 +1,35 @@
+﻿@model UniversitySystem.Models.Faculty
+
+<h2>Create Faculty</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label>Name</label>
+        <input asp-for="Name" />
+    </div>
+    <div>
+        <label>Email</label>
+        <input asp-for="Email" />
+    </div>
+    <div>
+        <label>Phone</label>
+        <input asp-for="phone" />
+    </div>
+    <div>
+        <label>Department</label>
+        <input asp-for="Department" />
+    </div>
+    <div>
+        <label>Title</label>
+        <input asp-for="Title" />
+    </div>
+    <div>
+        <label>Gender</label>
+        <select asp-for="Gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+    </div>
+
+    <button type="submit">Save</button>
+</form>

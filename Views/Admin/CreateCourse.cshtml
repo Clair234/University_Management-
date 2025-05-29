@@ -1,0 +1,166 @@
+﻿@model UniversitySystem.Models.Course
+
+@{
+    ViewBag.Title = "Create Course";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+
+<style>
+    body {
+        background-color: #f0f4f8;
+        color: #212529;
+        font-family: 'Segoe UI', sans-serif;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-weight: bold;
+        color: #0d6efd;
+        margin-bottom: 25px;
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #0d6efd;
+    }
+
+    .form-control {
+        background-color: #ffffff;
+        color: #212529;
+        border: 1px solid #ced4da;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+        .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+
+    .btn-success, .btn-secondary {
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 10px 20px;
+    }
+
+    .btn-success {
+        background-color: #198754;
+        border-color: #198754;
+    }
+
+        .btn-success:hover {
+            background-color: #157347;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .form-section {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="form-section">
+        <h2><i class="bi bi-journal-plus me-2"></i>Create New Course</h2>
+
+        <form asp-action="CreateCourse" method="post">
+            <div class="mb-3">
+                <label asp-for="CourseName" class="form-label"></label>
+                <input asp-for="CourseName" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CourseDescription" class="form-label"></label>
+                <textarea asp-for="CourseDescription" class="form-control"></textarea>
+                <span asp-validation-for="CourseDescription" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CreditHours" class="form-label"></label>
+                <input asp-for="CreditHours" type="number" class="form-control" />
+                <span asp-validation-for="CreditHours" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Department" class="form-label"></label>
+                <select asp-for="Department" class="form-control">
+                    <option value="">-- Select Department --</option>
+                    <option value="IS">IS</option>
+                    <option value="CS">CS</option>
+                    <option value="AI">AI</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Cyber Security">Cyber Security</option>
+                    <option value="Software Engineer">Software Engineer</option>
+                </select>
+                <span asp-validation-for="Department" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Semaster" class="form-label"></label>
+                <input asp-for="Semaster" class="form-control" />
+                <span asp-validation-for="Semaster" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="InstructorDropdown" class="form-label">Instructor</label>
+                <select id="InstructorDropdown" class="form-control" onchange="updateInstructorFields()">
+                    <option value="">-- Select Instructor --</option>
+                    @foreach (var instructor in ViewBag.Instructors)
+                    {
+                        <option value="@instructor.Value">@instructor.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="InstructorID" class="form-label">Instructor ID</label>
+                <input asp-for="InstructorID" type="number" class="form-control" id="InstructorID" readonly />
+                <span asp-validation-for="InstructorID" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <input type="hidden" asp-for="InstructorName" id="InstructorName" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MaxCapcity" class="form-label"></label>
+                <input asp-for="MaxCapcity" type="number" class="form-control" />
+                <span asp-validation-for="MaxCapcity" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="PrerequisiteCourseID" class="form-label"></label>
+                <input asp-for="PrerequisiteCourseID" type="number" class="form-control" />
+                <span asp-validation-for="PrerequisiteCourseID" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success mt-3 me-2">
+                <i class="bi bi-check-circle me-1"></i> Create
+            </button>
+            <a asp-action="ManageCourses" class="btn btn-secondary mt-3">
+                <i class="bi bi-x-circle me-1"></i> Cancel
+            </a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function updateInstructorFields() {
+            const selectedValue = document.getElementById("InstructorDropdown").value;
+            const [id, name] = selectedValue.split("|");
+            document.getElementById("InstructorID").value = id || '';
+            document.getElementById("InstructorName").value = name || '';
+        }
+    </script>
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

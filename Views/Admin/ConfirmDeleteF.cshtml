@@ -1,0 +1,27 @@
+﻿@model UniversitySystem.Models.Faculty
+
+@{
+    ViewData["Title"] = "Confirm Delete F";
+}
+
+<div class="container mt-4">
+    <h2>Confirm Delete</h2>
+
+    <div class="alert alert-danger">
+        <h4>Are you sure you want to delete this student?</h4>
+        <p>This action cannot be undone.</p>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p><strong>Email:</strong> @Model.Email</p>
+            
+    </div>
+
+    <form asp-action="ConfirmDeleteF" method="post">
+            <input type="hidden" name="id" value="@Model.UserID" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="@Url.Action("ManageFaculties", "Admin")" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
